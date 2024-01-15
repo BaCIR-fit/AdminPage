@@ -1,25 +1,13 @@
 import { sample } from 'lodash';
 import { faker } from '@faker-js/faker';
 
-// ----------------------------------------------------------------------
-
 export const users = [...Array(24)].map((_, index) => ({
-  id: faker.string.uuid(),
+  id: faker.number.int({ min: 1, max: 100000 }),
   avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
-  name: faker.person.fullName(),
-  company: faker.company.name(),
-  isVerified: faker.datatype.boolean(),
-  status: sample(['active', 'banned']),
-  role: sample([
-    'Leader',
-    'Hr Manager',
-    'UI Designer',
-    'UX Designer',
-    'UI/UX Designer',
-    'Project Manager',
-    'Backend Developer',
-    'Full Stack Designer',
-    'Front End Developer',
-    'Full Stack Developer',
-  ]),
+  nom: faker.person.lastName(),
+  prenom: faker.person.firstName(),
+  dateNaissance: faker.date.past().toLocaleDateString(),
+  sexe: sample(['Homme', 'Femme', 'Avion de chasse']),
+  actif: faker.datatype.boolean(),
+  mail: faker.internet.email(),
 }));

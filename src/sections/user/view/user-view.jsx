@@ -97,10 +97,10 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">Users</Typography>
+        <Typography variant="h4">Utilisateurs</Typography>
 
         <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          New User
+          Nouveau
         </Button>
       </Stack>
 
@@ -122,11 +122,11 @@ export default function UserPage() {
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: 'name', label: 'Name' },
-                  { id: 'company', label: 'Company' },
-                  { id: 'role', label: 'Role' },
-                  { id: 'isVerified', label: 'Verified', align: 'center' },
-                  { id: 'status', label: 'Status' },
+                  { id: '', label: 'Nom' },
+                  { id: 'dateNaissance', label: 'Date de naissance' },
+                  { id: 'sexe', label: 'Sexe' },
+                  { id: 'actif', label: 'Actif' },
+                  { id: 'id', label: 'ID' },
                   { id: '' },
                 ]}
               />
@@ -136,12 +136,14 @@ export default function UserPage() {
                   .map((row) => (
                     <UserTableRow
                       key={row.id}
-                      name={row.name}
-                      role={row.role}
-                      status={row.status}
-                      company={row.company}
+                      nom={row.nom} // Change this line
+                      prenom={row.prenom} // Change this line
+                      actif={row.actif} // Change this line
                       avatarUrl={row.avatarUrl}
-                      isVerified={row.isVerified}
+                      id={row.id} // Change this line
+                      dateNaissance={row.dateNaissance} // Change this line
+                      sexe={row.sexe} // Change this line
+                      mail={row.mail} // Change this line
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />

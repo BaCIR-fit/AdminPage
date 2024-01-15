@@ -18,12 +18,14 @@ import Iconify from 'src/components/iconify';
 
 export default function UserTableRow({
   selected,
-  name,
+  nom,
+  prenom,
   avatarUrl,
-  company,
-  role,
-  isVerified,
-  status,
+  id,
+  dateNaissance,
+  sexe,
+  actif,
+  mail,
   handleClick,
 }) {
   const [open, setOpen] = useState(null);
@@ -45,22 +47,22 @@ export default function UserTableRow({
 
         <TableCell component="th" scope="row" padding="none">
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Avatar alt={name} src={avatarUrl} />
+            <Avatar alt={nom} src={avatarUrl} />
             <Typography variant="subtitle2" noWrap>
-              {name}
+              {nom} {prenom}
             </Typography>
           </Stack>
         </TableCell>
 
-        <TableCell>{company}</TableCell>
+        <TableCell>{dateNaissance}</TableCell>
 
-        <TableCell>{role}</TableCell>
-
-        <TableCell align="center">{isVerified ? 'Yes' : 'No'}</TableCell>
+        <TableCell>{sexe}</TableCell>
 
         <TableCell>
-          <Label color={(status === 'banned' && 'error') || 'success'}>{status}</Label>
+          <Label color={(actif ? 'success' : 'error')}>{actif ? 'Oui' : 'Non'}</Label>
         </TableCell>
+
+        <TableCell>{id}</TableCell>
 
         <TableCell align="right">
           <IconButton onClick={handleOpenMenu}>
@@ -81,12 +83,12 @@ export default function UserTableRow({
       >
         <MenuItem onClick={handleCloseMenu}>
           <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
-          Edit
+          Modifier
         </MenuItem>
 
         <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
           <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
-          Delete
+          Supprimer
         </MenuItem>
       </Popover>
     </>
@@ -94,12 +96,14 @@ export default function UserTableRow({
 }
 
 UserTableRow.propTypes = {
+  selected: PropTypes.bool,
+  nom: PropTypes.string,
+  prenom: PropTypes.string,
   avatarUrl: PropTypes.any,
-  company: PropTypes.any,
+  id: PropTypes.number,
+  dateNaissance: PropTypes.string,
+  sexe: PropTypes.string,
+  actif: PropTypes.bool,
+  mail: PropTypes.string,
   handleClick: PropTypes.func,
-  isVerified: PropTypes.any,
-  name: PropTypes.any,
-  role: PropTypes.any,
-  selected: PropTypes.any,
-  status: PropTypes.string,
 };

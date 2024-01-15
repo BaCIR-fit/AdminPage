@@ -8,7 +8,7 @@ export default function AppPage() {
   return (
     <>
       <Helmet>
-        <title> Dashboard | Minimal UI </title>
+        <title> Admin de BaCIR fit </title>
       </Helmet>
 
       <AppView />
