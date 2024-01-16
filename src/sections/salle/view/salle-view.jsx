@@ -10,21 +10,29 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { employes } from 'src/_mock/employe';
+import { salle } from 'src/_mock/salle';
 
-import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
 import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
-import UserTableToolbar from '../user-table-toolbar';
+// import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 
 // ----------------------------------------------------------------------
 
 export default function UserPage() {
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handleSalleChange = (index) => {
+    setCurrentIndex(index);
+  };
+
+  const machine = salle[currentIndex].machines;
+
   const [page, setPage] = useState(0);
 
   const [order, setOrder] = useState('asc');
@@ -33,7 +41,7 @@ export default function UserPage() {
 
   const [orderBy, setOrderBy] = useState('name');
 
-  const [filterName, setFilterName] = useState('');
+  const [filterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -47,7 +55,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = employes.map((n) => n.name);
+      const newSelecteds = machine.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -81,13 +89,9 @@ export default function UserPage() {
     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
-  const handleFilterByName = (event) => {
-    setPage(0);
-    setFilterName(event.target.value);
-  };
 
   const dataFiltered = applyFilter({
-    inputData: employes,
+    inputData: machine,
     comparator: getComparator(order, orderBy),
     filterName,
   });
@@ -97,37 +101,33 @@ export default function UserPage() {
   return (
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
-        <Typography variant="h4">Employés</Typography>
+        <Typography variant="h4">Salles</Typography>
 
-        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
-          Nouveau
-        </Button>
+          {Array(salle.length).fill().map((_, index) => (
+            <Button key={index} variant="contained" color="inherit" onClick={() => handleSalleChange(index)}>
+              {salle[index].nomSalle}
+            </Button>
+          ))}
+
       </Stack>
 
       <Card>
-        <UserTableToolbar
-          numSelected={selected.length}
-          filterName={filterName}
-          onFilterName={handleFilterByName}
-        />
-
         <Scrollbar>
           <TableContainer sx={{ overflow: 'unset' }}>
             <Table sx={{ minWidth: 800 }}>
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={employes.length}
+                rowCount={machine.length}
                 numSelected={selected.length}
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
-                  { id: '', label: 'Nom' },
-                  { id: 'dateNaissance', label: 'Date de naissance' },
-                  { id: 'salleAttribuee', label: 'Salle' },
-                  { id: 'actif', label: 'Actif' },
+                  { id: 'nomMachine', label: 'Nom' },
+                  { id: 'marqueMachine', label: 'Marque' },
+                  { id: 'muscleTravaille', label: 'Muscle(s)' },
                   { id: 'id', label: 'ID' },
-                  { id: '' },
+                  { id: '', label: '' },
                 ]}
               />
               <TableBody>
@@ -135,15 +135,10 @@ export default function UserPage() {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row) => (
                     <UserTableRow
-                      key={row.id}
-                      nom={row.nom} // Change this line
-                      prenom={row.prenom} // Change this line
-                      actif={row.actif} // Change this line
-                      avatarUrl={row.avatarUrl}
-                      id={row.id} // Change this line
-                      dateNaissance={row.dateNaissance} // Change this line
-                      salleAttribuee={row.salleAttribuee} // Change this line
-                      mail={row.mail} // Change this line
+                      id={row.id}
+                      nomMachine={row.nomMachine}
+                      marqueMachine={row.marqueMachine}
+                      muscleTravaille={row.muscleTravaille}
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
                     />
@@ -151,7 +146,7 @@ export default function UserPage() {
 
                 <TableEmptyRows
                   height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, employes.length)}
+                  emptyRows={emptyRows(page, rowsPerPage, machine.length)}
                 />
 
                 {notFound && <TableNoData query={filterName} />}
@@ -163,7 +158,7 @@ export default function UserPage() {
         <TablePagination
           page={page}
           component="div"
-          count={employes.length}
+          count={machine.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
           rowsPerPageOptions={[5, 10, 25]}

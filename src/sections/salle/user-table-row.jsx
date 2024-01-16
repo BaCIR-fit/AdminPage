@@ -2,7 +2,6 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
 import TableRow from '@mui/material/TableRow';
 import Checkbox from '@mui/material/Checkbox';
@@ -11,23 +10,16 @@ import TableCell from '@mui/material/TableCell';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
-import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
-
-import SettingsModal from 'src/components/modal/modify';
 
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
   selected,
-  nom,
-  prenom,
-  avatarUrl,
   id,
-  dateNaissance,
-  actif,
-  mail,
-  salleAttribuee,
+  nomMachine,
+  marqueMachine,
+  muscleTravaille,
   handleClick,
 }) {
   const [open, setOpen] = useState(null);
@@ -40,24 +32,6 @@ export default function UserTableRow({
     setOpen(null);
   };
 
-  const [initialSettings] = useState({
-    "Nom": nom,
-    "Prénom": prenom, 
-    "Date de naissance": dateNaissance,
-    "Salle attribuée": salleAttribuee,
-    "Mail": mail,
-  });
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <>
       <TableRow hover tabIndex={-1} role="checkbox" selected={selected}>
@@ -67,20 +41,15 @@ export default function UserTableRow({
 
         <TableCell component="th" scope="row" padding="none">
           <Stack direction="row" alignItems="center" spacing={2}>
-            <Avatar alt={nom} src={avatarUrl} />
             <Typography variant="subtitle2" noWrap>
-              {nom} {prenom}
+              {nomMachine}
             </Typography>
           </Stack>
         </TableCell>
 
-        <TableCell>{dateNaissance}</TableCell>
+        <TableCell>{marqueMachine}</TableCell>
 
-        <TableCell>{salleAttribuee}</TableCell>
-
-        <TableCell>
-          <Label color={(actif ? 'success' : 'error')}>{actif ? 'Oui' : 'Non'}</Label>
-        </TableCell>
+        <TableCell>{muscleTravaille}</TableCell>
 
         <TableCell>{id}</TableCell>
 
@@ -101,7 +70,7 @@ export default function UserTableRow({
           sx: { width: 140 },
         }}
       >
-        <MenuItem onClick={handleOpenModal}>
+        <MenuItem onClick={handleCloseMenu}>
           <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
           Modifier
         </MenuItem>
@@ -111,22 +80,15 @@ export default function UserTableRow({
           Supprimer
         </MenuItem>
       </Popover>
-
-      {/* Utilisation du modal avec état local */}
-      <SettingsModal settings={initialSettings} open={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 }
 
 UserTableRow.propTypes = {
   selected: PropTypes.bool,
-  nom: PropTypes.string,
-  prenom: PropTypes.string,
-  avatarUrl: PropTypes.any,
   id: PropTypes.number,
-  dateNaissance: PropTypes.string,
-  salleAttribuee: PropTypes.string,
-  actif: PropTypes.bool,
-  mail: PropTypes.string,
+  nomMachine: PropTypes.string,
+  marqueMachine: PropTypes.string,
+  muscleTravaille: PropTypes.string,
   handleClick: PropTypes.func,
 };

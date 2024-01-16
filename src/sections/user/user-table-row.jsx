@@ -14,6 +14,8 @@ import IconButton from '@mui/material/IconButton';
 import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 
+import SettingsModal from 'src/components/modal/modify';
+
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
@@ -36,6 +38,24 @@ export default function UserTableRow({
 
   const handleCloseMenu = () => {
     setOpen(null);
+  };
+
+  const [initialSettings] = useState({
+    "Nom": nom,
+    "Prénom": prenom, 
+    "Date de naissance": dateNaissance,
+    "Genre": sexe,
+    "Mail": mail,
+  });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -81,7 +101,7 @@ export default function UserTableRow({
           sx: { width: 140 },
         }}
       >
-        <MenuItem onClick={handleCloseMenu}>
+        <MenuItem onClick={handleOpenModal}>
           <Iconify icon="eva:edit-fill" sx={{ mr: 2 }} />
           Modifier
         </MenuItem>
@@ -91,6 +111,9 @@ export default function UserTableRow({
           Supprimer
         </MenuItem>
       </Popover>
+
+      {/* Utilisation du modal avec état local */}
+      <SettingsModal settings={initialSettings} open={isModalOpen} onClose={handleCloseModal} />
     </>
   );
 }

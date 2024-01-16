@@ -6,7 +6,7 @@ export const employes = [...Array(5)].map((_, index) => ({
   nom: faker.person.lastName(),
   prenom: faker.person.firstName(),
   dateNaissance: faker.date.past().toLocaleDateString(),
-  salleAttribuee: faker.number.int({ min: 1, max: 3 }),
+  salleAttribuee: faker.number.int({ min: 1, max: 3 }).toString(),
   actif: faker.datatype.boolean(),
   mail: faker.internet.email(),
 }));

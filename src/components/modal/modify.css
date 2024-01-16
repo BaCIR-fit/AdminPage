@@ -1,0 +1,43 @@
+/* settingsModal.css */
+
+.modalContainer {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    width: 60%;
+    margin: auto;
+    margin-top: 90px;
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .modalTitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .modalInput {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .modalButton {
+    width: 100%;
+    margin-top: 16px;
+    background-color: #2196f3; /* Utilisez votre couleur préférée ici */
+    color: white;
+  }
+  
+  .modalButton:hover {
+    background-color: #1565c0; /* Utilisez une nuance plus sombre de la couleur principale */
+  }
+  
+  /* Ajoutez d'autres styles au besoin */
+  
