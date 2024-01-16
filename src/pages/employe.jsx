@@ -1,17 +1,17 @@
 import { Helmet } from 'react-helmet-async';
 
-import { AppView } from 'src/sections/overview/view';
+import { UserView } from 'src/sections/employe/view';
 
 // ----------------------------------------------------------------------
 
-export default function AppPage() {
+export default function EmployePage() {
   return (
     <>
       <Helmet>
-        <title> Admin de BaCIR fit </title>
+        <title> User | Minimal UI </title>
       </Helmet>
 
-      <AppView />
+      <UserView />
     </>
   );
 }

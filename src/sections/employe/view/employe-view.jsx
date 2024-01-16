@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 
-import { users } from 'src/_mock/user';
+import { employes } from 'src/_mock/employe';
 
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
@@ -47,7 +47,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = users.map((n) => n.name);
+      const newSelecteds = employes.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -87,7 +87,7 @@ export default function UserPage() {
   };
 
   const dataFiltered = applyFilter({
-    inputData: users,
+    inputData: employes,
     comparator: getComparator(order, orderBy),
     filterName,
   });
@@ -117,14 +117,14 @@ export default function UserPage() {
               <UserTableHead
                 order={order}
                 orderBy={orderBy}
-                rowCount={users.length}
+                rowCount={employes.length}
                 numSelected={selected.length}
                 onRequestSort={handleSort}
                 onSelectAllClick={handleSelectAllClick}
                 headLabel={[
                   { id: '', label: 'Nom' },
                   { id: 'dateNaissance', label: 'Date de naissance' },
-                  { id: 'sexe', label: 'Sexe' },
+                  { id: 'salleAttribuee', label: 'Salle' },
                   { id: 'actif', label: 'Actif' },
                   { id: 'id', label: 'ID' },
                   { id: '' },
@@ -142,7 +142,7 @@ export default function UserPage() {
                       avatarUrl={row.avatarUrl}
                       id={row.id} // Change this line
                       dateNaissance={row.dateNaissance} // Change this line
-                      sexe={row.sexe} // Change this line
+                      salleAttribuee={row.salleAttribuee} // Change this line
                       mail={row.mail} // Change this line
                       selected={selected.indexOf(row.name) !== -1}
                       handleClick={(event) => handleClick(event, row.name)}
@@ -151,7 +151,7 @@ export default function UserPage() {
 
                 <TableEmptyRows
                   height={77}
-                  emptyRows={emptyRows(page, rowsPerPage, users.length)}
+                  emptyRows={emptyRows(page, rowsPerPage, employes.length)}
                 />
 
                 {notFound && <TableNoData query={filterName} />}
@@ -163,7 +163,7 @@ export default function UserPage() {
         <TablePagination
           page={page}
           component="div"
-          count={users.length}
+          count={employes.length}
           rowsPerPage={rowsPerPage}
           onPageChange={handleChangePage}
           rowsPerPageOptions={[5, 10, 25]}

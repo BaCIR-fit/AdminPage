@@ -23,9 +23,9 @@ export default function UserTableRow({
   avatarUrl,
   id,
   dateNaissance,
-  sexe,
   actif,
   mail,
+  salleAttribuee,
   handleClick,
 }) {
   const [open, setOpen] = useState(null);
@@ -56,7 +56,7 @@ export default function UserTableRow({
 
         <TableCell>{dateNaissance}</TableCell>
 
-        <TableCell>{sexe}</TableCell>
+        <TableCell>{salleAttribuee}</TableCell>
 
         <TableCell>
           <Label color={(actif ? 'success' : 'error')}>{actif ? 'Oui' : 'Non'}</Label>
@@ -102,7 +102,7 @@ UserTableRow.propTypes = {
   avatarUrl: PropTypes.any,
   id: PropTypes.number,
   dateNaissance: PropTypes.string,
-  sexe: PropTypes.string,
+  salleAttribuee: PropTypes.string,
   actif: PropTypes.bool,
   mail: PropTypes.string,
   handleClick: PropTypes.func,
