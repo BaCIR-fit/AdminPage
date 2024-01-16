@@ -18,6 +18,11 @@ const navConfig = [
     icon: icon('ic_user'),
   },
   {
+    title: 'Employés',
+    path: '/employe',
+    icon: icon('ic_user'),
+  },
+  {
     title: 'Connexion',
     path: '/login',
     icon: icon('ic_lock'),
