@@ -32,6 +32,11 @@ const navConfig = [
     path: '/planning',
     icon: icon('ic_lock'),
   },
+  {
+    title: 'QR Code',
+    path: '/qrcode',
+    icon: icon('ic_lock'),
+  }
 
   // {
   //   title: 'Connexion',

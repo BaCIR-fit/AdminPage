@@ -12,6 +12,7 @@ export const ProductsPage = lazy(() => import('src/pages/products'));
 export const SallePage = lazy(() => import('src/pages/salle'));
 export const PlanningPage = lazy(() => import('src/pages/planning'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
+export const QRCodePage = lazy(() => import('src/pages/qrcode'));
 
 // ----------------------------------------------------------------------
 
@@ -33,6 +34,7 @@ export default function Router() {
         { path: 'blog', element: <BlogPage /> },
         { path: 'planning', element: <PlanningPage /> },
         { path: 'salle', element: <SallePage /> },
+        { path: 'qrcode', element: <QRCodePage /> },
       ],
     },
     {
