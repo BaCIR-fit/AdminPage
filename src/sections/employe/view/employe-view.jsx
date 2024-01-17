@@ -15,6 +15,8 @@ import { employes } from 'src/_mock/employe';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 
+import NewModal from 'src/components/modal/create';
+
 import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
@@ -94,12 +96,31 @@ export default function UserPage() {
 
   const notFound = !dataFiltered.length && !!filterName;
 
+  const [initialSettings] = useState({
+    "Nom": "",
+    "Prénom": "", 
+    "Date de naissance": "",
+    "Salle attribuée": "",
+    "Mail": "",
+  });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
+    <>
     <Container>
       <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4">Employés</Typography>
 
-        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />}>
+        <Button variant="contained" color="inherit" startIcon={<Iconify icon="eva:plus-fill" />} onClick={handleOpenModal}>
           Nouveau
         </Button>
       </Stack>
@@ -171,5 +192,8 @@ export default function UserPage() {
         />
       </Card>
     </Container>
+    
+    <NewModal settings={initialSettings} open={isModalOpen} onClose={handleCloseModal} />
+    </>
   );
 }
