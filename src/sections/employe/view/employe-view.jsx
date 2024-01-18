@@ -99,8 +99,8 @@ export default function UserPage() {
   const [initialSettings] = useState({
     "Nom": "",
     "Prénom": "", 
-    "Date de naissance": "",
-    "Salle attribuée": "",
+    "Date_de_naissance": "",
+    "Salle_attribuée": "",
     "Mail": "",
   });
 

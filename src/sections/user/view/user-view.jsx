@@ -99,9 +99,11 @@ export default function UserPage() {
   const [initialSettings] = useState({
     "Nom": "",
     "Prénom": "",
-    "Date de naissance": "",
-    "Salle attribuée": "",
+    "Date_de_naissance": "",
+    "Genre": "",
+    "Salle_attribuée": "",
     "Mail": "",
+    "Mot_de_passe": "",
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);

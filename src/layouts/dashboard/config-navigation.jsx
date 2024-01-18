@@ -17,11 +17,11 @@ const navConfig = [
     path: '/user',
     icon: icon('ic_user'),
   },
-  {
-    title: 'Employés',
-    path: '/employe',
-    icon: icon('ic_user'),
-  },
+  // {
+  //   title: 'Employés',
+  //   path: '/employe',
+  //   icon: icon('ic_user'),
+  // },
   {
     title: 'Salles',
     path: '/salle',
@@ -36,13 +36,12 @@ const navConfig = [
     title: 'QR Code',
     path: '/qrcode',
     icon: icon('ic_lock'),
-  }
-
-  // {
-  //   title: 'Connexion',
-  //   path: '/login',
-  //   icon: icon('ic_lock'),
-  // },
+  },
+  {
+    title: 'Connexion',
+    path: '/login',
+    icon: icon('ic_lock'),
+  },
   // {
   //   title: '',
   //   path: '',

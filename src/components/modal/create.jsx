@@ -4,16 +4,43 @@ import { Modal, Button, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import './create.css';
 
+import axios from 'axios';
+
+const addUser = async (firstName, lastName, birthDate, genderType, eMail, passWord) => {
+  try {
+      const response = await axios.post('https://apibacir.fly.dev/auth/register', {
+          first_name: firstName,
+          last_name: lastName,
+          birth_date: Date(birthDate),
+          gender: genderType,
+          email: eMail,
+          password: passWord,
+      }, {
+          headers: {
+              'accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      });
+
+      console.log(response.data);
+  } catch (error) {
+      console.error(error);
+  }
+};
+
 const NewModal = ({ settings, open, onClose }) => {
   const [updatedSettings, setUpdatedSettings] = useState(settings);
 
-  const handleSave = () => {
-    // Enregistrez vos paramètres mis à jour ici (onSave(updatedSettings))
-    onClose();  // Fermer le modal après la sauvegarde
-  };
+  const handleSave = (newSettings) => {
+    // console.log('handleSave : ', newSettings);
+
+    addUser(newSettings.Prénom, newSettings.Nom, newSettings.Date_de_naissance, newSettings.Genre, newSettings.Mail, newSettings.Mot_de_passe);
+    onClose();
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // console.log(`handleChange: ${name} - ${value}`);
     setUpdatedSettings((prevSettings) => ({
       ...prevSettings,
       [name]: value,
@@ -31,7 +58,7 @@ const NewModal = ({ settings, open, onClose }) => {
           <TextField
             key={paramName}
             fullWidth
-            label={paramName}
+            label={paramName.replaceAll("_"," ")}
             id={paramName}
             name={paramName}
             value={paramValue}
@@ -40,7 +67,7 @@ const NewModal = ({ settings, open, onClose }) => {
           />
         ))}
 
-        <Button variant="contained" onClick={handleSave} className="modalButton">
+        <Button variant="contained" onClick={() => handleSave(updatedSettings)} className="modalButton">
           Enregistrer
         </Button>
       </div>
