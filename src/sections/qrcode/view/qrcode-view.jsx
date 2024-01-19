@@ -11,7 +11,7 @@ import axios from 'axios';
 // ----------------------------------------------------------------------
 
 async function getUser(userID) {
-    const url = 'https://apibacir.fly.dev/user/getProfile';
+    const url = 'https://apibacir.fly.dev/user/getProfilee';
     const dataPost = {
         userId: userID,
     };

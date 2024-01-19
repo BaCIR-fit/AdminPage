@@ -16,6 +16,8 @@ import Iconify from 'src/components/iconify';
 
 import SettingsModal from 'src/components/modal/modify';
 
+import { deleteUser } from 'src/_mock/user';
+
 // ----------------------------------------------------------------------
 
 export default function UserTableRow({
@@ -57,6 +59,12 @@ export default function UserTableRow({
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };
+
+  const handleDelete = () => {
+    alert("Vous êtes sur le point de supprimer un utilisateur, êtes-vous sûr ?");
+    deleteUser(id);
+    setOpen(null);
+  }
 
   return (
     <>
@@ -106,7 +114,7 @@ export default function UserTableRow({
           Modifier
         </MenuItem>
 
-        <MenuItem onClick={handleCloseMenu} sx={{ color: 'error.main' }}>
+        <MenuItem onClick={handleDelete} sx={{ color: 'error.main' }}>
           <Iconify icon="eva:trash-2-outline" sx={{ mr: 2 }} />
           Supprimer
         </MenuItem>

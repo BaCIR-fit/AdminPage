@@ -1,19 +1,20 @@
-// SettingsModal.jsx
+// NewModal.jsx
 import React, { useState } from 'react';
 import { Modal, Button, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import './modify.css';
+import './create.css';
 
 import axios from 'axios';
 
-const modifyUser = async (firstName, lastName, birthDate, genderType, eMail) => {
+const addEvent = async (titre, coach, dateDebut, duree, salle, club) => {
   try {
-      const response = await axios.post('https://apibacir.fly.dev/user/editProfile', {
-          first_name: firstName,
-          last_name: lastName,
-          birth_date: Date(birthDate),
-          gender: genderType,
-          email: eMail,
+      const response = await axios.post('https://apibacir.fly.dev/admin/activity/add', {
+          activity_name: titre,
+          coach_name: coach,
+          activity_date: new Date(dateDebut).toISOString(),
+          activity_time_duration: duree,
+          room_id: salle,
+          club_id: club,
       }, {
           headers: {
               'accept': 'application/json',
@@ -28,18 +29,19 @@ const modifyUser = async (firstName, lastName, birthDate, genderType, eMail) => 
   }
 };
 
-const SettingsModal = ({ settings, open, onClose }) => {
+const NewModal = ({ settings, open, onClose }) => {
   const [updatedSettings, setUpdatedSettings] = useState(settings);
 
   const handleSave = (newSettings) => {
     // console.log('handleSave : ', newSettings);
 
-    modifyUser(newSettings.Prénom, newSettings.Nom, newSettings.Date_de_naissance, newSettings.Genre, newSettings.Mail);
+    addEvent(newSettings.Titre, newSettings.Coach, newSettings.Date_du_début, newSettings.Durée, newSettings.Salle, newSettings.Club);
     onClose();
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // console.log(`handleChange: ${name} - ${value}`);
     setUpdatedSettings((prevSettings) => ({
       ...prevSettings,
       [name]: value,
@@ -50,14 +52,14 @@ const SettingsModal = ({ settings, open, onClose }) => {
     <Modal open={open} onClose={onClose}>
       <div className="modalContainer">
         <div className="modalHeader">
-          <Typography variant="h6" className="modalTitle">Mettre à jour</Typography>
+          <Typography variant="h6" className="modalTitle">Ajouter</Typography>
         </div>
 
         {Object.entries(updatedSettings).map(([paramName, paramValue]) => (
           <TextField
             key={paramName}
             fullWidth
-            label={paramName}
+            label={paramName.replaceAll("_"," ")}
             id={paramName}
             name={paramName}
             value={paramValue}
@@ -66,7 +68,7 @@ const SettingsModal = ({ settings, open, onClose }) => {
           />
         ))}
 
-<Button variant="contained" onClick={() => handleSave(updatedSettings)} className="modalButton">
+        <Button variant="contained" onClick={() => handleSave(updatedSettings)} className="modalButton">
           Enregistrer
         </Button>
       </div>
@@ -74,10 +76,10 @@ const SettingsModal = ({ settings, open, onClose }) => {
   );
 };
 
-SettingsModal.propTypes = {
+NewModal.propTypes = {
   settings: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
 };
 
-export default SettingsModal;
+export default NewModal;

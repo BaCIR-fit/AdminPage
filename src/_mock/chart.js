@@ -14,7 +14,6 @@ export const camembertData = {
 // console.log(chartData);
 
 
-
 export const webData = {
     categories: ['English', 'History', 'Physics', 'Geography', 'Chinese', 'Math'],
     series: [
@@ -71,6 +70,8 @@ async function getData() {
             // Gérer les erreurs
             console.log(error);
         });
+
+    console.log("dataFromApi", dataFromApi);
 
     return dataFromApi;
 }
@@ -180,9 +181,11 @@ function parseDataBar(data) {
     });
 
     // console.log("seriesData", seriesData);
-    
+
+    const sortedSeriesData = seriesData.sort((a, b) => b.value - a.value);
+
     const barData = {
-        series : seriesData,
+        series: sortedSeriesData,
     };
 
     return barData;

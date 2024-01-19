@@ -10,7 +10,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem';
 
-import { fDateTime } from 'src/utils/format-time';
+// import { fDateTime } from 'src/utils/format-time';
 
 // ----------------------------------------------------------------------
 
@@ -66,7 +66,7 @@ function OrderItem({ item, lastTimeline }) {
         <Typography variant="subtitle2">{title}</Typography>
 
         <Typography variant="caption" sx={{ color: 'text.disabled' }}>
-          {fDateTime(time)}
+          {time ? new Date(time).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'numeric' }) : "Pas de date"}
         </Typography>
       </TimelineContent>
     </TimelineItem>

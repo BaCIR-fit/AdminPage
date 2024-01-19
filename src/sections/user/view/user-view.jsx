@@ -21,7 +21,6 @@ import TableNoData from '../table-no-data';
 import UserTableRow from '../user-table-row';
 import UserTableHead from '../user-table-head';
 import TableEmptyRows from '../table-empty-rows';
-import UserTableToolbar from '../user-table-toolbar';
 import { emptyRows, applyFilter, getComparator } from '../utils';
 
 // ----------------------------------------------------------------------
@@ -35,7 +34,7 @@ export default function UserPage() {
 
   const [orderBy, setOrderBy] = useState('name');
 
-  const [filterName, setFilterName] = useState('');
+  const [filterName] = useState('');
 
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -83,11 +82,6 @@ export default function UserPage() {
     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
-  const handleFilterByName = (event) => {
-    setPage(0);
-    setFilterName(event.target.value);
-  };
-
   const dataFiltered = applyFilter({
     inputData: users,
     comparator: getComparator(order, orderBy),
@@ -128,11 +122,11 @@ export default function UserPage() {
         </Stack>
 
         <Card>
-          <UserTableToolbar
+          {/* <UserTableToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
-          />
+          /> */}
 
           <Scrollbar>
             <TableContainer sx={{ overflow: 'unset' }}>

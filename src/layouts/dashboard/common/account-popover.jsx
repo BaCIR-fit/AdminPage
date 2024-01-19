@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import Box from '@mui/material/Box';
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import Popover from '@mui/material/Popover';
 import { alpha } from '@mui/material/styles';
@@ -55,7 +55,7 @@ export default function AccountPopover() {
           }),
         }}
       >
-        <Avatar
+        {/* <Avatar
           src={account.photoURL}
           alt={account.displayName}
           sx={{
@@ -65,7 +65,7 @@ export default function AccountPopover() {
           }}
         >
           {account.displayName.charAt(0).toUpperCase()}
-        </Avatar>
+        </Avatar> */}
       </IconButton>
 
       <Popover
